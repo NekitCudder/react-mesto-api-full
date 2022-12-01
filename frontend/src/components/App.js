@@ -32,10 +32,14 @@ function App() {
 
   function handleLogin(password, email) {
     auth.authorize(password, email)
-      .then((res) => {
-        console.log(res);
-        setLoggedIn(true);
-        history.push('/');
+      .then((result) => {
+        auth.getContent(result)
+          .then((res) => {
+            console.log(res);
+            setEmail(res.currentUser.email);
+            setLoggedIn(true);
+            history.push('/');
+          });
       })
       .catch((err) => {
         console.log(err);
@@ -73,7 +77,7 @@ function App() {
     auth.getContent()
       .then((res) => {
         if (res) {
-          setEmail(res.email);
+          setEmail(res.currentUser.email);
           setLoggedIn(true);
           history.push('/');
         }
@@ -85,7 +89,7 @@ function App() {
 
   React.useEffect(() => {
     checkToken();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   //загрузка данных пользователя
