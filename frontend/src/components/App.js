@@ -51,7 +51,7 @@ function App() {
   function handleRegister(password, email) {
     auth.register(password, email)
       .then((res) => {
-        console.log(res);     
+        console.log(res);
         handleInfoTooltipPopupOpen();
         setInfoMessage({
           image: successImage,
@@ -70,20 +70,17 @@ function App() {
   }
 
   const checkToken = () => {
-    const jwt = localStorage.getItem("jwt");
-    if (jwt) {
-      auth.getContent(jwt)
-        .then((res) => {
-          if (res) {
-            setEmail(res.data.email);
-            setLoggedIn(true);
-            history.push('/');
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
+    auth.getContent()
+      .then((res) => {
+        if (res) {
+          setEmail(res.data.email);
+          setLoggedIn(true);
+          history.push('/');
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   React.useEffect(() => {
@@ -178,7 +175,7 @@ function App() {
 
   //функция лайка карточки
   function handleCardLike(card) {
-    const isLiked = card.likes.some(i => i._id === currentUser._id);
+    const isLiked = card.likes.some(i => i === currentUser._id);
     api.changeLikeCardStatus(card._id, !isLiked)
       .then((newCard) => {
         setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
@@ -203,7 +200,7 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
 
-        <Header email={email} setEmail={setEmail}/>
+        <Header email={email} setEmail={setEmail} />
 
         <Switch>
           <ProtectedRoute

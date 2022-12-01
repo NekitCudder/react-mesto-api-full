@@ -1,4 +1,4 @@
-export const BASE_URL = 'https://auth.nomoreparties.co';
+export const BASE_URL = 'https://api.mesto.nekitcudder.nomoredomains.club';
 
 const response = (res) => {
   if (res.ok) {
@@ -53,3 +53,12 @@ export const getContent = (token) => {
   })
     .then(response);
 }
+
+export const logOut = () => {
+  return fetch(`${BASE_URL}/logout`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+};

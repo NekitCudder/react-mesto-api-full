@@ -112,3 +112,7 @@ module.exports.currentUser = (req, res, next) => {
     })
     .catch(next);
 };
+
+module.exports.logOut = (req, res) => {
+  res.clearCookie('jwt').send();
+};

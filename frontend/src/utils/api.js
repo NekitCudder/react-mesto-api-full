@@ -24,9 +24,7 @@ class Api {
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
       method: 'GET',
-      headers: {
-        authorization: `${this._headers.authorization}`,
-      }
+      headers: this.headers,
     })
       .then(this._checkStatus);
   }
@@ -34,10 +32,8 @@ class Api {
   editUserInfo(data) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'PATCH',
-      headers: {
-        authorization: `${this._headers.authorization}`,
-        'Content-Type': 'application/json'
-      },
+      headers: this.headers,
+      
       body: JSON.stringify({
         name: data.name,
         about: data.about
@@ -100,7 +96,7 @@ class Api {
 }
 
 const api = new Api({
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-48',
+  baseUrl: 'https://api.mesto.nekitcudder.nomoredomains.club',
   headers: {
     authorization: '3629ec08-4cd1-4c9c-b53e-0de7dbdbb7c9',
     'Content-Type': 'application/json'
