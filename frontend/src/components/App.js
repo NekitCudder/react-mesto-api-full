@@ -34,7 +34,6 @@ function App() {
     auth.authorize(password, email)
       .then((res) => {
         console.log(res);
-        setEmail(email);
         setLoggedIn(true);
         history.push('/');
       })
@@ -52,6 +51,7 @@ function App() {
     auth.register(password, email)
       .then((res) => {
         console.log(res);
+        setEmail(res.email);
         handleInfoTooltipPopupOpen();
         setInfoMessage({
           image: successImage,
@@ -73,7 +73,7 @@ function App() {
     auth.getContent()
       .then((res) => {
         if (res) {
-          setEmail(res.data.email);
+          setEmail(res.email);
           setLoggedIn(true);
           history.push('/');
         }

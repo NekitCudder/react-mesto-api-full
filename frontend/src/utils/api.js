@@ -14,9 +14,8 @@ class Api {
   getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'GET',
-      headers: {
-        authorization: `${this._headers.authorization}`
-      }
+      credentials: 'include',
+      headers: this._headers,
     })
       .then(this._checkStatus);
   }
@@ -24,7 +23,8 @@ class Api {
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
       method: 'GET',
-      headers: this.headers,
+      credentials: 'include',
+      headers: this._headers,
     })
       .then(this._checkStatus);
   }
@@ -32,9 +32,8 @@ class Api {
   editUserInfo(data) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'PATCH',
-      headers: this.headers,
-      
-      body: JSON.stringify({
+      credentials: 'include',
+      headers: this._headers, body: JSON.stringify({
         name: data.name,
         about: data.about
       }),
@@ -45,11 +44,8 @@ class Api {
   addNewCard(data) {
     return fetch(`${this._baseUrl}/cards`, {
       method: 'POST',
-      headers: {
-        authorization: `${this._headers.authorization}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
+      credentials: 'include',
+      headers: this._headers, body: JSON.stringify({
         name: data.name,
         link: data.link
       })
@@ -60,11 +56,8 @@ class Api {
   editAvatar(data) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: 'PATCH',
-      headers: {
-        authorization: `${this._headers.authorization}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
+      credentials: 'include',
+      headers: this._headers, body: JSON.stringify({
         avatar: data.avatar
       }),
     })
@@ -74,10 +67,8 @@ class Api {
   deleteCard(id) {
     return fetch(`${this._baseUrl}/cards/${id}`, {
       method: 'DELETE',
-      headers: {
-        authorization: `${this._headers.authorization}`,
-        'Content-Type': 'application/json'
-      }
+      credentials: 'include',
+      headers: this._headers,
     })
       .then(this._checkStatus);
   }
@@ -85,10 +76,8 @@ class Api {
   changeLikeCardStatus(id, isLiked) {
     return fetch(`${this._baseUrl}/cards/${id}/likes`, {
       method: `${isLiked ? "PUT" : "DELETE"}`,
-      headers: {
-        authorization: `${this._headers.authorization}`,
-        'Content-Type': 'application/json'
-      }
+      credentials: 'include',
+      headers: this._headers,
     })
       .then(this._checkStatus);
   }
@@ -97,9 +86,9 @@ class Api {
 
 const api = new Api({
   baseUrl: 'https://api.mesto.nekitcudder.nomoredomains.club',
+  credentials: 'include',
   headers: {
-    authorization: '3629ec08-4cd1-4c9c-b53e-0de7dbdbb7c9',
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
   }
 });
 
