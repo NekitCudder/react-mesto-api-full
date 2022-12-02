@@ -36,7 +36,6 @@ function App() {
         auth.getContent(result)
           .then((res) => {
             console.log(res);
-            setEmail(res.currentUser.email);
             setLoggedIn(true);
             history.push('/');
           });
@@ -77,7 +76,7 @@ function App() {
     auth.getContent()
       .then((res) => {
         if (res) {
-          setEmail(res.currentUser.email);
+          setEmail(res.email);
           setLoggedIn(true);
           history.push('/');
         }
