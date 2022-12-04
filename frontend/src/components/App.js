@@ -132,7 +132,7 @@ function App() {
   function handleUpdateUser(data) {
     api.editUserInfo(data)
       .then((res) => {
-        setCurrentUser(res);
+        setCurrentUser(res.data);
         closeAllPopups();
       })
       .catch((err) => {
@@ -144,7 +144,7 @@ function App() {
   function handleUpdateAvatar(data) {
     api.editAvatar(data)
       .then((res) => {
-        setCurrentUser(res);
+        setCurrentUser(res.data);
         closeAllPopups();
       })
       .catch((err) => {
@@ -156,7 +156,7 @@ function App() {
   function handleAddPlaceSubmit(data) {
     api.addNewCard(data)
       .then((newCard) => {
-        setCards([newCard, ...cards]);
+        setCards([newCard.data, ...cards]);
         closeAllPopups()
       })
       .catch((err) => {
@@ -168,8 +168,8 @@ function App() {
   React.useEffect(() => {
     if (loggedIn) {
       api.getInitialCards()
-        .then((data) => {
-          setCards(data)
+        .then((cards) => {
+          setCards(cards.data)
         })
         .catch((err) => {
           console.log(`Ошибка загрузки карточек с сервера: ${err}`);
@@ -182,7 +182,7 @@ function App() {
     const isLiked = card.likes.some(i => i === currentUser._id);
     api.changeLikeCardStatus(card._id, !isLiked)
       .then((newCard) => {
-        setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+        setCards((state) => state.map((c) => c._id === card._id ? newCard.data : c));
       })
       .catch((err) => {
         console.log(`Ошибка лайка карточки: ${err}`);
