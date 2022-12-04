@@ -18,5 +18,5 @@
 - 51.250.74.33
 
 ##
-- Frontend: [https://mesto.nekitcudder.nomoredomains.club]
-- Backend: [https://api.mesto.nekitcudder.nomoredomains.club]
+- Frontend: https://mesto.nekitcudder.nomoredomains.club
+- Backend: https://api.mesto.nekitcudder.nomoredomains.club
