@@ -200,11 +200,20 @@ function App() {
       });
   }
 
+  function signOut() {
+    auth.logOut();
+    setLoggedIn(false);
+    setCurrentUser({});
+    setCards([]);
+    setEmail('');
+    history.push('/sign-in');
+  }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
 
-        <Header email={email} setEmail={setEmail} />
+        <Header email={email} setEmail={setEmail} signOut={signOut} />
 
         <Switch>
           <ProtectedRoute

@@ -2,14 +2,7 @@ import React from 'react';
 import { Route, Switch, Link, useHistory } from "react-router-dom";
 import logo from '../images/logo.svg';
 
-function Header({ email, setEmail }) {
-  const history = useHistory();
-
-  function signOut() {
-    localStorage.removeItem('jwt');
-    history.push('/sign-in');
-    setEmail('');
-  }
+function Header({ email, setEmail, signOut }) {
 
   return (
     <header className="header">
