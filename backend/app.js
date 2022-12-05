@@ -62,11 +62,13 @@ app.post('/logout', logOut);
 app.use(auth);
 app.use('/users', userRouter);
 app.use('/cards', cardRouter);
-app.use(errorLogger);
 
 app.use('/*', () => {
   throw new NotFoundError('Запрашиваемая страница не найдена.');
 });
+
+app.use(errorLogger);
+
 app.use(errors());
 app.use((err, req, res, next) => {
   const { statusCode = 500, message } = err;

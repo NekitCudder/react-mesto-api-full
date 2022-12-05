@@ -10,9 +10,9 @@ module.exports.auth = (req, res, next) => {
   }
   let payload;
   try {
-    payload = jwt.verify(token, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret');
+    payload = jwt.verify(token, NODE_ENV === 'production' ? JWT_SECRET : 'secret-key');
   } catch (err) {
-    throw new UnauthorizedError('Ошибка авторизации #2.');
+    next(new UnauthorizedError('Ошибка авторизации #2.'));
   }
   req.user = payload;
   next();

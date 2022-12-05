@@ -1,8 +1,8 @@
 import React from 'react';
-import { Route, Switch, Link, useHistory } from "react-router-dom";
+import { Route, Switch, Link, } from "react-router-dom";
 import logo from '../images/logo.svg';
 
-function Header({ email, setEmail, signOut }) {
+function Header({ email, signOut }) {
 
   return (
     <header className="header">

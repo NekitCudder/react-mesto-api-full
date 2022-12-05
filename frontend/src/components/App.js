@@ -36,6 +36,7 @@ function App() {
         auth.getContent(result)
           .then((res) => {
             console.log(res);
+            setEmail(res.email);
             setLoggedIn(true);
             history.push('/');
           });
